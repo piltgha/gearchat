@@ -2,7 +2,7 @@ import streamlit as st
 import tiktoken
 from loguru import logger
 
-from langchain_community.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import Docx2txtLoader
@@ -11,7 +11,7 @@ from langchain_community.document_loaders import UnstructuredPowerPointLoader
 from langchain.chains import ConversationalRetrievalChain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.memory import ConversationBufferMemory
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 from langchain_community.vectorstores import FAISS
@@ -143,7 +143,7 @@ def get_conversation_chain(vetorestore,openai_api_key):
             llm=llm, 
             chain_type="stuff", 
             retriever=vetorestore.as_retriever(search_type = 'mmr', vervose = True), 
-            memory=ConversationBufferMemory(memory_key='chat_history', return_messages=True, output_key='answer'),
+            memory=ConversationBufferMemory(memory_key='chat_history', return_messages=True),
             get_chat_history=lambda h: h,
             return_source_documents=True,
             verbose = True
