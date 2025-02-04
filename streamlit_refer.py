@@ -24,7 +24,7 @@ def main():
     page_title="GearChat",
     page_icon=":guitar:")
 
-    st.title("_red[GearChat]_ :guitar:")
+    st.title("_:red[GearChat]_ :guitar:")
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -129,7 +129,7 @@ def get_text_chunks(text):
 
 def get_vectorstore(text_chunks):
     embeddings = HuggingFaceEmbeddings(
-                                        model_name="jhgan/ko-sroberta-multitask",
+                                        model_name="all-MiniLM-L6-v2",
                                         model_kwargs={'device': 'cpu'},
                                         encode_kwargs={'normalize_embeddings': True}
                                         )  
